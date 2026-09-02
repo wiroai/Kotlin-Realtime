@@ -1,0 +1,49 @@
+complexity:
+  ComplexCondition:
+    allowedConditions: 5
+  CyclomaticComplexMethod:
+    allowedComplexity: 25
+  LargeClass:
+    allowedLines: 1500
+  LongParameterList:
+    active: false
+  LongMethod:
+    allowedLines: 150
+  TooManyFunctions:
+    allowedFunctionsPerFile: 30
+    allowedFunctionsPerClass: 35
+    allowedFunctionsPerInterface: 25
+    allowedFunctionsPerObject: 25
+
+exceptions:
+  RethrowCaughtException:
+    active: false
+  TooGenericExceptionCaught:
+    allowedExceptionNameRegex: '(_|(ignore|expected|error).*)'
+
+coroutines:
+  SuspendFunWithFlowReturnType:
+    active: false
+
+naming:
+  FunctionNaming:
+    ignoreAnnotated:
+      - Composable
+  MemberNameEqualsClassName:
+    active: false
+
+style:
+  AbstractClassCanBeInterface:
+    active: false
+  LoopWithTooManyJumpStatements:
+    active: false
+  MagicNumber:
+    active: false
+  MaxLineLength:
+    maxLineLength: 120
+  ReturnCount:
+    max: 6
+  ThrowsCount:
+    active: false
+  UseOrEmpty:
+    active: false

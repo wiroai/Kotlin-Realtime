@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Wiro Realtime</string>
+    <string name="microphone_permission_rationale">
+        Wiro Realtime needs the microphone for live conversation
+        and transcription.
+    </string>
+</resources>

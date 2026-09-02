@@ -1,0 +1,36 @@
+# Gradle
+.gradle/
+build/
+**/build/
+
+# IDE
+.idea/
+*.iml
+.kotlin/
+.vscode/
+
+# Local SDK and secrets
+local.properties
+secrets.properties
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+*.key
+signing.properties
+key.properties
+credentials.json
+service-account*.json
+.env
+.env.*
+.secrets/
+
+# OS
+.DS_Store
+*.md
+!README.md
+
+# Captures / logs
+captures/
+*.log
