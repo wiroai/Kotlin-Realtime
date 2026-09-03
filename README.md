@@ -196,14 +196,22 @@ WIRO_API_KEY=test ./gradlew spotlessApply detekt \
 
 Tests mirror `ai.wiro.realtime` and ship fakes for audio, network,
 and the socket, so the entire session lifecycle runs without a
-device.
+device. CI runs `spotlessCheck`, `detekt`, and the unit tests on
+every push and pull request.
+
+## Contributing
+
+Read [`CONTRIBUTING.md`](CONTRIBUTING.md) before opening a pull
+request. Security problems go to [`SECURITY.md`](SECURITY.md), not
+to a public issue.
 
 ## Documentation
 
 - [Wiro documentation](https://wiro.ai/docs)
 - [Available models](https://wiro.ai/models)
 - [Swift counterpart](https://github.com/wiroai/Swift-Realtime)
-- [Dart counterpart](https://github.com/wiro-ai/Dart-Realtime)
+- [React Native counterpart](https://github.com/wiroai/ReactNative-Realtime)
+- [Dart counterpart](https://github.com/wiroai/Dart-Realtime)
 
 ## License
 
