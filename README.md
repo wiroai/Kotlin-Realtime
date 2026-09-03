@@ -37,6 +37,15 @@ microphone level, chat-bubble transcripts, and the Expressive
 loading shape while connecting. Light and dark Wiro themes follow
 the system. There is no custom orb, wave, or tab bar.
 
+## Screenshots
+
+<p align="center">
+  <img src="docs/screenshots/conversation-idle.png" alt="Conversation idle stage with Start conversation" width="220" />
+  <img src="docs/screenshots/conversation-live.png" alt="Live conversation with transcripts and call toolbar" width="220" />
+  <img src="docs/screenshots/transcription.png" alt="Live transcription" width="220" />
+  <img src="docs/screenshots/speech.png" alt="Text-to-speech prompt and Play" width="220" />
+</p>
+
 ## Features
 
 - Live speech-to-speech conversation with voice activity detection,
