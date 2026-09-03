@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Spotless, detekt, unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      # BuildConfig needs a value; the tests never talk to Wiro.
+      WIRO_API_KEY: test
+    steps:
+      - uses: actions/checkout@v4
+
+      # Gradle provisions the daemon JVM named in
+      # gradle/gradle-daemon-jvm.properties through the foojay
+      # resolver; this JDK only has to launch the wrapper.
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: android-actions/setup-android@v3
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - run: ./gradlew spotlessCheck detekt :app:testDebugUnitTest --no-daemon
