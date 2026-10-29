@@ -6,7 +6,7 @@
 
 Realtime voice AI for Android in Kotlin and Jetpack Compose: live conversation, speech-to-text and text-to-speech with the Wiro AI API.
 
-[![Kotlin 2.4](https://img.shields.io/badge/Kotlin-2.4-111111?style=for-the-badge&color=111111&logo=kotlin&logoColor=white)](https://kotlinlang.org) [![Android API 26+](https://img.shields.io/badge/Android-API%2026%2B-111111?style=for-the-badge&color=111111&logo=android&logoColor=white)](#requirements) [![JDK 17](https://img.shields.io/badge/JDK-17-111111?style=for-the-badge&color=111111&logo=openjdk&logoColor=white)](#requirements) [![CI](https://img.shields.io/github/actions/workflow/status/wiroai/Kotlin-Realtime/ci.yml?branch=main&style=for-the-badge&color=111111&label=CI&logo=githubactions&logoColor=white)](https://github.com/wiroai/Kotlin-Realtime/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-111111?style=for-the-badge&color=111111)](LICENSE)
+[![Kotlin 2.4](https://img.shields.io/badge/Kotlin-2.4-111111?style=for-the-badge&color=111111&logo=kotlin&logoColor=white)](https://kotlinlang.org) [![Android API 26+](https://img.shields.io/badge/Android-API%2026%2B-111111?style=for-the-badge&color=111111&logo=android&logoColor=white)](#requirements) [![JDK 17](https://img.shields.io/badge/JDK-17-111111?style=for-the-badge&color=111111&logo=openjdk&logoColor=white)](#requirements) [![License: MIT](https://img.shields.io/badge/License-MIT-111111?style=for-the-badge&color=111111)](LICENSE)
 
 [Website](https://wiro.ai) · [Models](https://wiro.ai/models) · [Docs](https://wiro.ai/docs/realtime-voice-conversation) · [Dashboard](https://wiro.ai/panel)
 
