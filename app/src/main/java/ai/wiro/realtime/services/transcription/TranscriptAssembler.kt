@@ -1,42 +1,36 @@
 package ai.wiro.realtime.services.transcription
 
 /**
- * Folds progressive `TRANSCRIPT_USER` events into running text.
+ * Builds the running text from `TRANSCRIPT_USER` pieces.
  *
- * The model streams each utterance and starts over at the next
- * one, so a raw replace would leave only the last fragment. An
- * event that extends the live utterance refines it; one that does
- * not is a new utterance, and the finished one is confirmed.
+ * Each piece carries only new text, often a single word or a short
+ * phrase, and never repeats or revises an earlier one. The full
+ * transcript is every non-empty piece, trimmed and joined with
+ * single spaces, which is also how the server saves it.
  */
 internal class TranscriptAssembler {
-    var confirmed: String = ""
-        private set
-    var live: String = ""
-        private set
+    private var transcript: String = ""
 
     fun reset() {
-        confirmed = ""
-        live = ""
+        transcript = ""
     }
 
+    /**
+     * Appends one piece and returns the whole transcript, or null
+     * when the piece holds no text.
+     */
     fun applyUserText(text: String): String? {
         val trimmed = text.trim()
         if (trimmed.isEmpty()) {
             return null
         }
-        if (trimmed.startsWith(live) || live.isEmpty()) {
-            live = trimmed
-        } else if (!live.startsWith(trimmed)) {
-            confirmed = joined()
-            live = trimmed
+        transcript = if (transcript.isEmpty()) {
+            trimmed
+        } else {
+            "$transcript $trimmed"
         }
-        return joined()
+        return transcript
     }
 
-    fun joined(): String {
-        if (confirmed.isEmpty()) {
-            return live
-        }
-        return "$confirmed $live"
-    }
+    fun joined(): String = transcript
 }

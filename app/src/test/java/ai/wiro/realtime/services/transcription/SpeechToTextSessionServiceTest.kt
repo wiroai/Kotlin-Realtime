@@ -52,63 +52,77 @@ class SpeechToTextSessionServiceTest {
     }
 
     @Test
-    fun aGrowingUtteranceRefinesTheTranscriptInPlace() = runTest {
+    fun eachTranscriptPieceIsAppendedWithOneSpace() = runTest {
         val dependencies = TranscriptionTestDependencies()
         val service = dependencies.createService(this)
         service.start()
 
         dependencies.session.emit(
-            RealtimeEvent.Output("TRANSCRIPT_USER:Hello"),
+            RealtimeEvent.Output("TRANSCRIPT_USER:If"),
         )
         dependencies.session.emit(
-            RealtimeEvent.Output("TRANSCRIPT_USER:Hello world"),
+            RealtimeEvent.Output("TRANSCRIPT_USER:I"),
+        )
+        dependencies.session.emit(
+            RealtimeEvent.Output("TRANSCRIPT_USER:could"),
         )
 
-        assertEquals("Hello world", service.snapshot.transcript)
+        assertEquals("If I could", service.snapshot.transcript)
         assertEquals(
-            2,
+            3,
             service.snapshot.protocolEvents.count { it == "task_output" },
         )
         service.dispose()
     }
 
     @Test
-    fun aNewUtteranceJoinsTheTranscriptInsteadOfErasingIt() = runTest {
+    fun aPieceThatStartsWithThePreviousOneIsKept() = runTest {
         val dependencies = TranscriptionTestDependencies()
         val service = dependencies.createService(this)
         service.start()
 
         dependencies.session.emit(
-            RealtimeEvent.Output("TRANSCRIPT_USER:Hello world."),
+            RealtimeEvent.Output("TRANSCRIPT_USER:we"),
         )
         dependencies.session.emit(
-            RealtimeEvent.Output("TRANSCRIPT_USER:How are"),
-        )
-        dependencies.session.emit(
-            RealtimeEvent.Output("TRANSCRIPT_USER:How are you?"),
-        )
-        dependencies.session.emit(
-            RealtimeEvent.Output("TRANSCRIPT_USER:Good."),
+            RealtimeEvent.Output("TRANSCRIPT_USER:were"),
         )
 
-        assertEquals(
-            "Hello world. How are you? Good.",
-            service.snapshot.transcript,
-        )
+        assertEquals("we were", service.snapshot.transcript)
         service.dispose()
     }
 
     @Test
-    fun aShorterReEmitOfTheLiveUtteranceChangesNothing() = runTest {
+    fun aRepeatedPieceIsKept() = runTest {
         val dependencies = TranscriptionTestDependencies()
         val service = dependencies.createService(this)
         service.start()
 
         dependencies.session.emit(
-            RealtimeEvent.Output("TRANSCRIPT_USER:Hello world"),
+            RealtimeEvent.Output("TRANSCRIPT_USER:the"),
         )
         dependencies.session.emit(
+            RealtimeEvent.Output("TRANSCRIPT_USER:the"),
+        )
+
+        assertEquals("the the", service.snapshot.transcript)
+        service.dispose()
+    }
+
+    @Test
+    fun aWhitespaceOnlyPieceIsIgnored() = runTest {
+        val dependencies = TranscriptionTestDependencies()
+        val service = dependencies.createService(this)
+        service.start()
+
+        dependencies.session.emit(
             RealtimeEvent.Output("TRANSCRIPT_USER:Hello"),
+        )
+        dependencies.session.emit(
+            RealtimeEvent.Output("TRANSCRIPT_USER:   "),
+        )
+        dependencies.session.emit(
+            RealtimeEvent.Output("TRANSCRIPT_USER: world "),
         )
 
         assertEquals("Hello world", service.snapshot.transcript)
